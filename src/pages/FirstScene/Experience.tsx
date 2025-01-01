@@ -3,16 +3,19 @@ import { useFrame } from '@react-three/fiber';
 import type * as THREE from 'three';
 
 export const Experience = () => {
-  const groupRef = useRef<THREE.Group | null>(null);
   const cubeRef = useRef<THREE.Mesh | null>(null);
 
-  useFrame((_state, delta) => {
-    const group = groupRef.current;
+  useFrame(({ clock, camera }, delta) => {
     const cube = cubeRef.current;
 
-    if (!group || !cube) return;
+    if (!cube) return;
 
-    group.rotation.y += delta;
+    const angle = clock.elapsedTime;
+
+    camera.position.x = Math.sin(angle) * 8;
+    camera.position.z = Math.cos(angle) * 8;
+    camera.lookAt(0, 0, 0);
+
     cube.rotation.y += delta;
   });
 
@@ -22,7 +25,7 @@ export const Experience = () => {
         <planeGeometry />
         <meshBasicMaterial color="greenyellow" />
       </mesh>
-      <group ref={groupRef}>
+      <group>
         <mesh position-x={-2}>
           <sphereGeometry />
           <meshBasicMaterial color="orange" />
