@@ -1,26 +1,26 @@
 import { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useThree, extend, useFrame } from '@react-three/fiber';
 import type * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+extend({ OrbitControls });
 
 export const Experience = () => {
+  const { camera, gl } = useThree();
+
   const cubeRef = useRef<THREE.Mesh | null>(null);
 
-  useFrame(({ clock, camera }, delta) => {
+  useFrame((_state, delta) => {
     const cube = cubeRef.current;
 
     if (!cube) return;
-
-    const angle = clock.elapsedTime;
-
-    camera.position.x = Math.sin(angle) * 8;
-    camera.position.z = Math.cos(angle) * 8;
-    camera.lookAt(0, 0, 0);
 
     cube.rotation.y += delta;
   });
 
   return (
     <>
+      <orbitControls args={[camera, gl.domElement]} />
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
         <meshBasicMaterial color="greenyellow" />
