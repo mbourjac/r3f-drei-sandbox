@@ -1,7 +1,9 @@
-import { useMemo } from 'react';
-import { DoubleSide } from 'three';
+import { useEffect, useMemo, useRef } from 'react';
+import { type BufferGeometry, DoubleSide } from 'three';
 
 export const CustomObject = () => {
+  const geometryRef = useRef<BufferGeometry | null>(null);
+
   const verticesCount = 10 * 3;
 
   const positions = useMemo(
@@ -14,9 +16,19 @@ export const CustomObject = () => {
     [verticesCount],
   );
 
+  useEffect(() => {
+    const geometry = geometryRef.current;
+
+    if (!geometry) {
+      throw new Error('geometryRef is not assigned');
+    }
+
+    geometry.computeVertexNormals();
+  }, [positions]);
+
   return (
     <mesh>
-      <bufferGeometry>
+      <bufferGeometry ref={geometryRef}>
         <bufferAttribute
           attach="attributes-position"
           count={verticesCount}
@@ -24,7 +36,7 @@ export const CustomObject = () => {
           array={positions}
         />
       </bufferGeometry>
-      <meshBasicMaterial color="red" side={DoubleSide} />
+      <meshStandardMaterial color="red" side={DoubleSide} />
     </mesh>
   );
 };
