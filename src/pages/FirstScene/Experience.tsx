@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useThree, extend, useFrame } from '@react-three/fiber';
 import type * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { CustomObject } from './CustomObject';
 
 extend({ OrbitControls });
 
@@ -32,7 +33,6 @@ export const Experience = () => {
           <sphereGeometry />
           <meshStandardMaterial color="orange" />
         </mesh>
-
         <mesh
           ref={cubeRef}
           rotation-y={Math.PI * 0.25}
@@ -43,6 +43,7 @@ export const Experience = () => {
           <meshStandardMaterial color="mediumpurple" />
         </mesh>
       </group>
+      <CustomObject />
     </>
   );
 };
