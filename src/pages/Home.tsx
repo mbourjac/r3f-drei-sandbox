@@ -5,7 +5,10 @@ import { cn } from '../lib/tailwind';
 export const Home = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
-  const links = [{ path: '/first-scene', label: 'First scene' }];
+  const links = [
+    { path: '/first-scene', label: 'First scene' },
+    { path: '/drei', label: 'Drei' },
+  ];
 
   return (
     <main className="min-h-screen px-4 text-white">
