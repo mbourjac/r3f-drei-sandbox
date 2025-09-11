@@ -27,7 +27,11 @@ export const Experience = () => {
         <mesh position-x={-2}>
           <sphereGeometry />
           <meshStandardMaterial color="orange" />
-          <Html position={[1, 1, 0]}>Sphere</Html>
+          <Html position={[1, 1, 0]} center>
+            <p className="absolute select-none rounded-full bg-black/80 px-4 py-2 text-white">
+              Sphere
+            </p>
+          </Html>
         </mesh>
       </PivotControls>
 
