@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import {
+  Html,
   OrbitControls,
   PivotControls,
   TransformControls,
@@ -26,6 +27,7 @@ export const Experience = () => {
         <mesh position-x={-2}>
           <sphereGeometry />
           <meshStandardMaterial color="orange" />
+          <Html position={[1, 1, 0]}>Sphere</Html>
         </mesh>
       </PivotControls>
 
@@ -33,6 +35,7 @@ export const Experience = () => {
         <boxGeometry />
         <meshStandardMaterial color="mediumpurple" />
       </mesh>
+
       <TransformControls object={cubeRef} />
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
