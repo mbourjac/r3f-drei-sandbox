@@ -9,6 +9,7 @@ import type { Mesh } from 'three';
 
 export const Experience = () => {
   const cubeRef = useRef<Mesh>(null!);
+  const sphereRef = useRef<Mesh>(null!);
 
   return (
     <>
@@ -24,10 +25,15 @@ export const Experience = () => {
         axisColors={['#9381ff', '#ff4d6d', '#7ae582']}
         scale={1}
       >
-        <mesh position-x={-2}>
+        <mesh ref={sphereRef} position-x={-2}>
           <sphereGeometry />
           <meshStandardMaterial color="orange" />
-          <Html position={[1, 1, 0]} center distanceFactor={8}>
+          <Html
+            position={[1, 1, 0]}
+            center
+            distanceFactor={8}
+            occlude={[sphereRef, cubeRef]}
+          >
             <p className="absolute select-none rounded-full bg-black/80 px-4 py-2 text-white">
               Sphere
             </p>
