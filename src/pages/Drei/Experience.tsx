@@ -18,7 +18,12 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <Text font="./fonts/Inter28pt-Regular.woff" fontSize={1.5} color="white">
+      <Text
+        font="./fonts/Inter28pt-Regular.woff"
+        fontSize={1.5}
+        color="white"
+        position-y={2}
+      >
         Lorem Ipsum
       </Text>
 
