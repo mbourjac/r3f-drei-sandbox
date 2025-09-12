@@ -18,7 +18,9 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <Text font="./fonts/Inter28pt-Regular.woff">Lorem Ipsum</Text>
+      <Text font="./fonts/Inter28pt-Regular.woff" fontSize={1.5} color="white">
+        Lorem Ipsum
+      </Text>
 
       <PivotControls
         anchor={[0, 0, 0]}
