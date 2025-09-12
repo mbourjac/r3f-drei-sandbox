@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import {
+  Text,
   OrbitControls,
   PivotControls,
   TransformControls,
 } from '@react-three/drei';
 import type { Mesh } from 'three';
-import { ExperienceHtml } from './ExperienceHtml';
 
 export const Experience = () => {
   const cubeRef = useRef<Mesh>(null!);
@@ -18,6 +18,8 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
+      <Text>Lorem Ipsum</Text>
+
       <PivotControls
         anchor={[0, 0, 0]}
         depthTest={false}
@@ -28,7 +30,6 @@ export const Experience = () => {
         <mesh ref={sphereRef} position-x={-2}>
           <sphereGeometry />
           <meshStandardMaterial color="orange" />
-          <ExperienceHtml cubeRef={cubeRef} sphereRef={sphereRef} />
         </mesh>
       </PivotControls>
 
