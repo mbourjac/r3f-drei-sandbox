@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import {
-  Html,
   OrbitControls,
   PivotControls,
   TransformControls,
 } from '@react-three/drei';
 import type { Mesh } from 'three';
+import { ExperienceHtml } from './ExperienceHtml';
 
 export const Experience = () => {
   const cubeRef = useRef<Mesh>(null!);
@@ -28,16 +28,7 @@ export const Experience = () => {
         <mesh ref={sphereRef} position-x={-2}>
           <sphereGeometry />
           <meshStandardMaterial color="orange" />
-          <Html
-            position={[1, 1, 0]}
-            center
-            distanceFactor={8}
-            occlude={[sphereRef, cubeRef]}
-          >
-            <p className="absolute select-none rounded-full bg-black/80 px-4 py-2 text-white">
-              Sphere
-            </p>
-          </Html>
+          <ExperienceHtml cubeRef={cubeRef} sphereRef={sphereRef} />
         </mesh>
       </PivotControls>
 
