@@ -21,12 +21,12 @@ export const Experience = () => {
       <Text
         font="./fonts/Inter28pt-Regular.woff"
         fontSize={1.5}
-        color="white"
         position-y={2}
         maxWidth={2}
         textAlign="center"
       >
         Lorem Ipsum
+        <meshNormalMaterial />
       </Text>
 
       <PivotControls
