@@ -1,12 +1,11 @@
 import { useRef } from 'react';
 import {
-  Float,
+  MeshReflectorMaterial,
   OrbitControls,
   PivotControls,
   TransformControls,
 } from '@react-three/drei';
 import type { Mesh } from 'three';
-import { ExperienceText } from './ExperienceText';
 
 export const Experience = () => {
   const cubeRef = useRef<Mesh>(null!);
@@ -18,10 +17,6 @@ export const Experience = () => {
 
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
-
-      <Float speed={5} floatIntensity={2}>
-        <ExperienceText />
-      </Float>
 
       <PivotControls
         anchor={[0, 0, 0]}
@@ -45,6 +40,13 @@ export const Experience = () => {
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
+        <MeshReflectorMaterial
+          mirror={0.5}
+          resolution={512}
+          blur={[1000, 1000]}
+          mixBlur={1}
+          color="greenyellow"
+        />
       </mesh>
     </>
   );
