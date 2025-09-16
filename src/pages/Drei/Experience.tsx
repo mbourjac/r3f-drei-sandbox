@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import {
+  Float,
   OrbitControls,
   PivotControls,
   TransformControls,
@@ -18,7 +19,9 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <ExperienceText />
+      <Float speed={5} floatIntensity={2}>
+        <ExperienceText />
+      </Float>
 
       <PivotControls
         anchor={[0, 0, 0]}
@@ -42,7 +45,6 @@ export const Experience = () => {
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
-        <meshStandardMaterial color="greenyellow" />
       </mesh>
     </>
   );
