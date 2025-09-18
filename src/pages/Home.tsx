@@ -8,6 +8,7 @@ export const Home = () => {
   const links = [
     { path: '/first-scene', label: 'First scene' },
     { path: '/drei', label: 'Drei' },
+    { path: '/debug', label: 'Debug' },
   ];
 
   return (
