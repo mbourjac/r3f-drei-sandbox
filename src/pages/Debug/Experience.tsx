@@ -4,10 +4,9 @@ import { useControls } from 'leva';
 export const Experience = () => {
   const { position } = useControls({
     position: {
-      value: -2,
-      min: -4,
-      max: 4,
+      value: { x: -2, y: 0 },
       step: 0.01,
+      joystick: 'invertY',
     },
   });
 
@@ -18,7 +17,7 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <mesh position-x={position}>
+      <mesh position={[position.x, position.y, 0]}>
         <sphereGeometry />
         <meshStandardMaterial color="orange" />
       </mesh>
