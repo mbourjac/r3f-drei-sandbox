@@ -2,13 +2,14 @@ import { OrbitControls } from '@react-three/drei';
 import { useControls } from 'leva';
 
 export const Experience = () => {
-  const { position, color } = useControls({
+  const { position, color, visible } = useControls({
     position: {
       value: { x: -2, y: 0 },
       step: 0.01,
       joystick: 'invertY',
     },
     color: '#ff0000',
+    visible: true,
   });
 
   return (
@@ -18,7 +19,7 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <mesh position={[position.x, position.y, 0]}>
+      <mesh visible={visible} position={[position.x, position.y, 0]}>
         <sphereGeometry />
         <meshStandardMaterial color={color} />
       </mesh>
