@@ -10,6 +10,11 @@ export const Experience = () => {
     },
     color: '#ff0000',
     visible: true,
+    interval: {
+      min: 0,
+      max: 10,
+      value: [4, 5],
+    },
   });
 
   return (
