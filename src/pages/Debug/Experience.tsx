@@ -1,5 +1,5 @@
 import { OrbitControls } from '@react-three/drei';
-import { useControls } from 'leva';
+import { button, useControls } from 'leva';
 
 export const Experience = () => {
   const { position, color, visible } = useControls({
@@ -15,6 +15,9 @@ export const Experience = () => {
       max: 10,
       value: [4, 5],
     },
+    clickMe: button(() => {
+      console.log('click');
+    }),
   });
 
   return (
