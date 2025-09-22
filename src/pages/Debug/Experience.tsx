@@ -3,6 +3,10 @@ import { button, useControls } from 'leva';
 import { Perf } from 'r3f-perf';
 
 export const Experience = () => {
+  const { perfVisible } = useControls('perf', {
+    perfVisible: true,
+  });
+
   const { position, color, visible } = useControls('sphere', {
     position: {
       value: { x: -2, y: 0 },
@@ -33,7 +37,7 @@ export const Experience = () => {
 
   return (
     <>
-      <Perf position="top-left" />
+      {perfVisible && <Perf position="top-left" />}
 
       <OrbitControls makeDefault />
 
