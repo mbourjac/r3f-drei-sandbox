@@ -18,6 +18,7 @@ export const Experience = () => {
     clickMe: button(() => {
       console.log('click');
     }),
+    choice: { options: ['a', 'b', 'c'] },
   });
 
   return (
