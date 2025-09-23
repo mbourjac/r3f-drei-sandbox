@@ -1,7 +1,11 @@
-import { Canvas } from '@react-three/fiber';
+import { Canvas, type RootState } from '@react-three/fiber';
 import { Experience } from './Experience';
 
 export const EnvironmentAndStaging = () => {
+  const created = ({ gl }: RootState) => {
+    gl.setClearColor('#ff0000', 1);
+  };
+
   return (
     <Canvas
       camera={{
@@ -10,6 +14,7 @@ export const EnvironmentAndStaging = () => {
         far: 200,
         position: [-4, 3, 6],
       }}
+      onCreated={created}
     >
       <Experience />
     </Canvas>
