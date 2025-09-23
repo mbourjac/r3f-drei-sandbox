@@ -9,6 +9,7 @@ export const Home = () => {
     { path: '/first-scene', label: 'First scene' },
     { path: '/drei', label: 'Drei' },
     { path: '/debug', label: 'Debug' },
+    { path: '/environment-and-staging', label: 'Environment and staging' },
   ];
 
   return (
