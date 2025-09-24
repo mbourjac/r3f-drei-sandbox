@@ -22,6 +22,8 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
+      <color args={['ivory']} attach="background" />
+
       <mesh position-x={-2}>
         <sphereGeometry />
         <meshStandardMaterial color="orange" />
