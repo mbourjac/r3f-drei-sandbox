@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { OrbitControls, useHelper } from '@react-three/drei';
+import { OrbitControls, SoftShadows, useHelper } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { Perf } from 'r3f-perf';
 import * as THREE from 'three';
@@ -21,6 +21,8 @@ export const Experience = () => {
       <Perf position="top-left" />
 
       <OrbitControls makeDefault />
+
+      <SoftShadows size={25} samples={10} focus={0} />
 
       <directionalLight
         ref={directionalLightRef}
