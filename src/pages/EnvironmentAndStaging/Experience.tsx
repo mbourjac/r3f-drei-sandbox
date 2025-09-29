@@ -1,5 +1,10 @@
 import { useRef } from 'react';
-import { ContactShadows, OrbitControls, useHelper } from '@react-three/drei';
+import {
+  ContactShadows,
+  OrbitControls,
+  Sky,
+  useHelper,
+} from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
@@ -23,6 +28,10 @@ export const Experience = () => {
     blur: { value: 2.8, min: 0, max: 10 },
   });
 
+  const { sunPosition } = useControls('sky', {
+    sunPosition: { value: [1, 2, 3] },
+  });
+
   return (
     <>
       <Perf position="top-left" />
@@ -31,7 +40,7 @@ export const Experience = () => {
 
       <directionalLight
         ref={directionalLightRef}
-        position={[1, 2, 3]}
+        position={sunPosition}
         intensity={4.5}
         castShadow
         shadow-mapSize={[1024, 1024]}
@@ -43,6 +52,8 @@ export const Experience = () => {
         shadow-camera-left={-5}
       />
       <ambientLight intensity={1.5} />
+
+      <Sky sunPosition={sunPosition} />
 
       <ContactShadows
         position={[0, -0.99, 0]}
