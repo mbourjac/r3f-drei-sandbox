@@ -1,21 +1,26 @@
 import { useRef } from 'react';
-import {
-  AccumulativeShadows,
-  OrbitControls,
-  RandomizedLight,
-} from '@react-three/drei';
+import { ContactShadows, OrbitControls, useHelper } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
+import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
-import type * as THREE from 'three';
+import * as THREE from 'three';
 
 export const Experience = () => {
   const cubeRef = useRef<THREE.Mesh | null>(null);
   const directionalLightRef = useRef<THREE.DirectionalLight>(null!);
 
+  useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
+
   useFrame((_state, delta) => {
     if (!cubeRef.current) return;
 
     cubeRef.current.rotation.y += delta * 0.2;
+  });
+
+  const { color, opacity, blur } = useControls('contact shadows', {
+    color: '#1d8f75',
+    opacity: { value: 0.4, min: 0, max: 1 },
+    blur: { value: 2.8, min: 0, max: 10 },
   });
 
   return (
@@ -39,24 +44,15 @@ export const Experience = () => {
       />
       <ambientLight intensity={1.5} />
 
-      <AccumulativeShadows
+      <ContactShadows
         position={[0, -0.99, 0]}
         scale={10}
-        color="#316d39"
-        opacity={0.8}
-        frames={Infinity}
-        blend={100}
-        temporal
-      >
-        <RandomizedLight
-          amount={8}
-          radius={1}
-          ambient={0.5}
-          intensity={3}
-          position={[1, 2, 3]}
-          bias={0.001}
-        />
-      </AccumulativeShadows>
+        resolution={512}
+        far={5}
+        color={color}
+        opacity={opacity}
+        blur={blur}
+      />
 
       <color args={['ivory']} attach="background" />
 
