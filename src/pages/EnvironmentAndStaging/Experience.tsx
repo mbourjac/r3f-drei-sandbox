@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   ContactShadows,
+  Environment,
   OrbitControls,
-  Sky,
   useHelper,
 } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { useControls } from 'leva';
 import { Perf } from 'r3f-perf';
 import * as THREE from 'three';
@@ -28,9 +28,15 @@ export const Experience = () => {
     blur: { value: 2.8, min: 0, max: 10 },
   });
 
-  const { sunPosition } = useControls('sky', {
-    sunPosition: { value: [1, 2, 3] },
+  const { envMapIntensity } = useControls('environment map', {
+    envMapIntensity: { value: 3.5, min: 0, max: 12 },
   });
+
+  const scene = useThree((state) => state.scene);
+
+  useEffect(() => {
+    scene.environmentIntensity = envMapIntensity;
+  }, [scene, envMapIntensity]);
 
   return (
     <>
@@ -38,22 +44,17 @@ export const Experience = () => {
 
       <OrbitControls makeDefault />
 
-      <directionalLight
-        ref={directionalLightRef}
-        position={sunPosition}
-        intensity={4.5}
-        castShadow
-        shadow-mapSize={[1024, 1024]}
-        shadow-camera-near={1}
-        shadow-camera-far={10}
-        shadow-camera-top={5}
-        shadow-camera-right={5}
-        shadow-camera-bottom={-5}
-        shadow-camera-left={-5}
+      <Environment
+        background={false}
+        files={[
+          './environment-maps/2/px.jpg',
+          './environment-maps/2/nx.jpg',
+          './environment-maps/2/py.jpg',
+          './environment-maps/2/ny.jpg',
+          './environment-maps/2/pz.jpg',
+          './environment-maps/2/nz.jpg',
+        ]}
       />
-      <ambientLight intensity={1.5} />
-
-      <Sky sunPosition={sunPosition} />
 
       <ContactShadows
         position={[0, -0.99, 0]}
