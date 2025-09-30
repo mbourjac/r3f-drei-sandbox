@@ -29,7 +29,7 @@ export const Experience = () => {
   });
 
   const { envMapIntensity } = useControls('environment map', {
-    envMapIntensity: { value: 3.5, min: 0, max: 12 },
+    envMapIntensity: { value: 1.5, min: 0, max: 12 },
   });
 
   const scene = useThree((state) => state.scene);
@@ -46,14 +46,7 @@ export const Experience = () => {
 
       <Environment
         background={false}
-        files={[
-          './environment-maps/2/px.jpg',
-          './environment-maps/2/nx.jpg',
-          './environment-maps/2/py.jpg',
-          './environment-maps/2/ny.jpg',
-          './environment-maps/2/pz.jpg',
-          './environment-maps/2/nz.jpg',
-        ]}
+        files="./environment-maps/the_sky_is_on_fire_2k.hdr"
       />
 
       <ContactShadows
