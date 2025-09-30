@@ -44,10 +44,7 @@ export const Experience = () => {
 
       <OrbitControls makeDefault />
 
-      <Environment
-        background={false}
-        files="./environment-maps/the_sky_is_on_fire_2k.hdr"
-      />
+      <Environment background={false} preset="sunset" />
 
       <ContactShadows
         position={[0, -0.99, 0]}
