@@ -44,7 +44,13 @@ export const Experience = () => {
 
       <OrbitControls makeDefault />
 
-      <Environment background={false} preset="sunset" />
+      <Environment background={false}>
+        <color args={['#000000']} attach="background" />
+        <mesh position-z={-5} scale={10}>
+          <planeGeometry />
+          <meshBasicMaterial color={[2, 0, 0]} />
+        </mesh>
+      </Environment>
 
       <ContactShadows
         position={[0, -0.99, 0]}
@@ -56,7 +62,7 @@ export const Experience = () => {
         blur={blur}
       />
 
-      <color args={['ivory']} attach="background" />
+      <color args={['#000000']} attach="background" />
 
       <mesh position-x={-2} castShadow>
         <sphereGeometry />
@@ -71,6 +77,11 @@ export const Experience = () => {
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
         <meshStandardMaterial color="greenyellow" />
+      </mesh>
+
+      <mesh position-z={-5} scale={10}>
+        <planeGeometry />
+        <meshBasicMaterial color={[2, 0, 0]} />
       </mesh>
     </>
   );
