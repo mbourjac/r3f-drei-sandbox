@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import {
   ContactShadows,
   Environment,
+  Lightformer,
   OrbitControls,
   useHelper,
 } from '@react-three/drei';
@@ -44,12 +45,15 @@ export const Experience = () => {
 
       <OrbitControls makeDefault />
 
-      <Environment background={false}>
+      <Environment background preset="sunset" resolution={32}>
         <color args={['#000000']} attach="background" />
-        <mesh position-z={-5} scale={10}>
-          <planeGeometry />
-          <meshBasicMaterial color={[2, 0, 0]} />
-        </mesh>
+        <Lightformer
+          position-z={-5}
+          scale={5}
+          color="red"
+          intensity={10}
+          form="ring"
+        />
       </Environment>
 
       <ContactShadows
@@ -77,11 +81,6 @@ export const Experience = () => {
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
         <planeGeometry />
         <meshStandardMaterial color="greenyellow" />
-      </mesh>
-
-      <mesh position-z={-5} scale={10}>
-        <planeGeometry />
-        <meshBasicMaterial color={[2, 0, 0]} />
       </mesh>
     </>
   );
