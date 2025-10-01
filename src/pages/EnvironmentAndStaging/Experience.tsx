@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import {
   ContactShadows,
   Environment,
-  Lightformer,
   OrbitControls,
   useHelper,
 } from '@react-three/drei';
@@ -29,9 +28,13 @@ export const Experience = () => {
     blur: { value: 2.8, min: 0, max: 10 },
   });
 
-  const { envMapIntensity } = useControls('environment map', {
-    envMapIntensity: { value: 1.5, min: 0, max: 12 },
-  });
+  const { envMapIntensity, envMapHeight, envMapRadius, envMapScale } =
+    useControls('environment map', {
+      envMapIntensity: { value: 7, min: 0, max: 12 },
+      envMapHeight: { value: 7, min: 0, max: 100 },
+      envMapRadius: { value: 28, min: 10, max: 1000 },
+      envMapScale: { value: 100, min: 10, max: 1000 },
+    });
 
   const scene = useThree((state) => state.scene);
 
@@ -45,19 +48,17 @@ export const Experience = () => {
 
       <OrbitControls makeDefault />
 
-      <Environment background preset="sunset" resolution={32}>
-        <color args={['#000000']} attach="background" />
-        <Lightformer
-          position-z={-5}
-          scale={5}
-          color="red"
-          intensity={10}
-          form="ring"
-        />
-      </Environment>
+      <Environment
+        preset="sunset"
+        ground={{
+          height: envMapHeight,
+          radius: envMapRadius,
+          scale: envMapScale,
+        }}
+      ></Environment>
 
       <ContactShadows
-        position={[0, -0.99, 0]}
+        position={[0, 0, 0]}
         scale={10}
         resolution={512}
         far={5}
@@ -68,19 +69,14 @@ export const Experience = () => {
 
       <color args={['#000000']} attach="background" />
 
-      <mesh position-x={-2} castShadow>
+      <mesh position-y={1} position-x={-2} castShadow>
         <sphereGeometry />
         <meshStandardMaterial color="orange" />
       </mesh>
 
-      <mesh ref={cubeRef} position-x={2} scale={1.5} castShadow>
+      <mesh ref={cubeRef} position-x={2} position-y={1} scale={1.5} castShadow>
         <boxGeometry />
         <meshStandardMaterial color="mediumpurple" />
-      </mesh>
-
-      <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
-        <planeGeometry />
-        <meshStandardMaterial color="greenyellow" />
       </mesh>
     </>
   );
