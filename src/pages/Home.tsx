@@ -10,6 +10,7 @@ export const Home = () => {
     { path: '/drei', label: 'Drei' },
     { path: '/debug', label: 'Debug' },
     { path: '/environment-and-staging', label: 'Environment and staging' },
+    { path: '/load-models', label: 'Load models' },
   ];
 
   return (
