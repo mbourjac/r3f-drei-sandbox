@@ -1,20 +1,9 @@
+import { Suspense } from 'react';
 import { OrbitControls } from '@react-three/drei';
-import { useLoader } from '@react-three/fiber';
 import { Perf } from 'r3f-perf';
-import { DRACOLoader, GLTFLoader } from 'three/examples/jsm/Addons.js';
+import { Model } from './Model';
 
 export const Experience = () => {
-  const model = useLoader(
-    GLTFLoader,
-    './models/hamburger-draco.glb',
-    (loader) => {
-      const dracoLoader = new DRACOLoader();
-
-      dracoLoader.setDecoderPath('./models/draco/');
-      loader.setDRACOLoader(dracoLoader);
-    },
-  );
-
   return (
     <>
       <Perf position="top-left" />
@@ -36,7 +25,9 @@ export const Experience = () => {
         <meshStandardMaterial color="greenyellow" />
       </mesh>
 
-      <primitive object={model.scene} scale={0.35} />
+      <Suspense>
+        <Model />
+      </Suspense>
     </>
   );
 };
