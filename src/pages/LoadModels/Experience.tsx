@@ -1,8 +1,6 @@
-import { Suspense } from 'react';
 import { OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 import { Model } from './Model';
-import { ModelPlaceholder } from './ModelPlaceholder';
 
 export const Experience = () => {
   return (
@@ -26,11 +24,7 @@ export const Experience = () => {
         <meshStandardMaterial color="greenyellow" />
       </mesh>
 
-      <Suspense
-        fallback={<ModelPlaceholder position-y={0.5} scale={[2, 3, 2]} />}
-      >
-        <Model />
-      </Suspense>
+      <Model />
     </>
   );
 };
