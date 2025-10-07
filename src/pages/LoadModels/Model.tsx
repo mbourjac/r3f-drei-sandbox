@@ -5,3 +5,5 @@ export const Model = () => {
 
   return <primitive object={model.scene} scale={0.35} />;
 };
+
+useGLTF.preload('./models/hamburger-draco.glb');
