@@ -1,18 +1,26 @@
 import { useEffect } from 'react';
 import { useAnimations, useGLTF } from '@react-three/drei';
+import { useControls } from 'leva';
 
 export const Fox = () => {
   const fox = useGLTF('./models/Fox/glTF/Fox.gltf');
   const animations = useAnimations(fox.animations, fox.scene);
 
-  useEffect(() => {
-    animations.actions.Run?.play();
+  const { animationName } = useControls({
+    animationName: { options: animations.names },
+  });
 
-    window.setTimeout(() => {
-      animations.actions.Walk?.play();
-      animations.actions.Walk?.crossFadeFrom(animations.actions.Run!, 1, true);
-    }, 2000);
-  }, [animations.actions]);
+  useEffect(() => {
+    const action = animations.actions[animationName];
+
+    if (!action) return;
+
+    action.reset().fadeIn(0.5).play();
+
+    return () => {
+      action.fadeOut(0.5);
+    };
+  }, [animationName, animations.actions]);
 
   return (
     <primitive
