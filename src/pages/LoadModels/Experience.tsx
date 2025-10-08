@@ -1,6 +1,6 @@
 import { OrbitControls } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
-import { Hamburger } from './Hamburger';
+import { Fox } from './Fox';
 
 export const Experience = () => {
   return (
@@ -29,7 +29,7 @@ export const Experience = () => {
         <meshStandardMaterial color="greenyellow" />
       </mesh>
 
-      <Hamburger scale={0.35} />
+      <Fox />
     </>
   );
 };
