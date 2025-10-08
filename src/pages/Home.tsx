@@ -11,6 +11,7 @@ export const Home = () => {
     { path: '/debug', label: 'Debug' },
     { path: '/environment-and-staging', label: 'Environment and staging' },
     { path: '/load-models', label: 'Load models' },
+    { path: '/text-3d', label: '3D Text' },
   ];
 
   return (
