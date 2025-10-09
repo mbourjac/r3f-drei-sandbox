@@ -1,4 +1,4 @@
-import { OrbitControls, Text3D } from '@react-three/drei';
+import { Center, OrbitControls, Text3D } from '@react-three/drei';
 import { Perf } from 'r3f-perf';
 
 export const Experience = () => {
@@ -10,10 +10,12 @@ export const Experience = () => {
 
       <color args={['ivory']} attach="background" />
 
-      <Text3D font="./fonts/helvetiker_regular.typeface.json">
-        LOREM IPSUM
-        <meshNormalMaterial />
-      </Text3D>
+      <Center>
+        <Text3D font="./fonts/helvetiker_regular.typeface.json">
+          LOREM IPSUM
+          <meshNormalMaterial />
+        </Text3D>
+      </Center>
     </>
   );
 };
