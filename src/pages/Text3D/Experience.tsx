@@ -17,6 +17,22 @@ export const Experience = () => {
 
       <color args={['ivory']} attach="background" />
 
+      {Array.from({ length: 100 }).map((_, index) => (
+        <mesh
+          key={index}
+          position={[
+            (Math.random() - 0.5) * 10,
+            (Math.random() - 0.5) * 10,
+            (Math.random() - 0.5) * 10,
+          ]}
+          scale={0.2 + Math.random() * 0.4}
+          rotation={[Math.random() * Math.PI, Math.random() * Math.PI, 0]}
+        >
+          <torusGeometry />
+          <meshMatcapMaterial matcap={matcapTexture} />
+        </mesh>
+      ))}
+
       <Center>
         <Text3D
           font="./fonts/helvetiker_regular.typeface.json"
