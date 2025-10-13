@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   Center,
   OrbitControls,
   Text3D,
   useMatcapTexture,
 } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import { Perf } from 'r3f-perf';
 import * as THREE from 'three';
 
@@ -13,6 +14,14 @@ const material = new THREE.MeshMatcapMaterial();
 
 export const Experience = () => {
   const [matcapTexture] = useMatcapTexture('7B5254_E9DCC7_B19986_C8AC91', 256);
+
+  const donuts = useRef<THREE.Mesh[]>([]);
+
+  useFrame((_state, delta) => {
+    for (const donut of donuts.current) {
+      donut.rotation.y += delta * 0.2;
+    }
+  });
 
   useEffect(() => {
     matcapTexture.colorSpace = THREE.SRGBColorSpace;
@@ -33,6 +42,10 @@ export const Experience = () => {
       {Array.from({ length: 100 }).map((_, index) => (
         <mesh
           key={index}
+          ref={(element) => {
+            if (!element) return;
+            donuts.current[index] = element;
+          }}
           geometry={torusGeometry}
           material={material}
           position={[
