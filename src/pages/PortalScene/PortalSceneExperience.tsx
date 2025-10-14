@@ -1,4 +1,4 @@
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { OrbitControls, useGLTF, useTexture } from '@react-three/drei';
 import type { BufferGeometry } from 'three';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -12,12 +12,17 @@ export const PortalSceneExperience = () => {
   const { nodes } = useGLTF(
     './models/portal/portal.glb',
   ) as unknown as PortalGLTF;
+  const bakedTexture = useTexture('./models/portal/baked.jpg');
+
+  bakedTexture.flipY = false;
 
   return (
     <>
       <color args={['#030202']} attach="background" />
       <OrbitControls makeDefault />
-      <mesh geometry={nodes.baked.geometry} />
+      <mesh geometry={nodes.baked.geometry}>
+        <meshBasicMaterial map={bakedTexture} />
+      </mesh>
     </>
   );
 };
