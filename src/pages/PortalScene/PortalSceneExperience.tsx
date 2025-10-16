@@ -1,10 +1,12 @@
 import { Center, OrbitControls, useGLTF, useTexture } from '@react-three/drei';
-import type { BufferGeometry } from 'three';
+import type { Mesh } from 'three';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 type PortalGLTF = GLTF & {
   nodes: {
-    baked: { geometry: BufferGeometry };
+    baked: Mesh;
+    poleLightA: Mesh;
+    poleLightB: Mesh;
   };
 };
 
@@ -23,6 +25,18 @@ export const PortalSceneExperience = () => {
       <Center>
         <mesh geometry={nodes.baked.geometry}>
           <meshBasicMaterial map={bakedTexture} />
+        </mesh>
+        <mesh
+          geometry={nodes.poleLightA.geometry}
+          position={nodes.poleLightA.position}
+        >
+          <meshBasicMaterial color="#ffffe5" />
+        </mesh>
+        <mesh
+          geometry={nodes.poleLightB.geometry}
+          position={nodes.poleLightB.position}
+        >
+          <meshBasicMaterial color="#ffffe5" />
         </mesh>
       </Center>
     </>
