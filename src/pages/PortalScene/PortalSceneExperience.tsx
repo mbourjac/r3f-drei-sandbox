@@ -1,4 +1,4 @@
-import { OrbitControls, useGLTF, useTexture } from '@react-three/drei';
+import { Center, OrbitControls, useGLTF, useTexture } from '@react-three/drei';
 import type { BufferGeometry } from 'three';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
@@ -20,9 +20,11 @@ export const PortalSceneExperience = () => {
     <>
       <color args={['#030202']} attach="background" />
       <OrbitControls makeDefault />
-      <mesh geometry={nodes.baked.geometry}>
-        <meshBasicMaterial map={bakedTexture} />
-      </mesh>
+      <Center>
+        <mesh geometry={nodes.baked.geometry}>
+          <meshBasicMaterial map={bakedTexture} />
+        </mesh>
+      </Center>
     </>
   );
 };
