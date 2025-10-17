@@ -4,6 +4,7 @@ import { PortalSceneExperience } from './PortalSceneExperience';
 export const PortalScene = () => {
   return (
     <Canvas
+      flat
       camera={{
         fov: 45,
         near: 0.1,
