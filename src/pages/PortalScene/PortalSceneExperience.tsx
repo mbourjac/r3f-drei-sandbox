@@ -6,7 +6,10 @@ import {
   useTexture,
 } from '@react-three/drei';
 import type { Mesh } from 'three';
+import * as THREE from 'three';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import portalFragmentShader from './shaders/portal/fragment.glsl';
+import portalVertexShader from './shaders/portal/vertex.glsl';
 
 type PortalGLTF = GLTF & {
   nodes: {
@@ -38,7 +41,15 @@ export const PortalSceneExperience = () => {
           position={portalLight.position}
           rotation={portalLight.rotation}
         >
-          <meshBasicMaterial color="#ffffff" />
+          <shaderMaterial
+            vertexShader={portalVertexShader}
+            fragmentShader={portalFragmentShader}
+            uniforms={{
+              uTime: { value: 0 },
+              uColorStart: { value: new THREE.Color('#ffffff') },
+              uColorEnd: { value: new THREE.Color('#000000') },
+            }}
+          />
         </mesh>
         <mesh geometry={poleLightA.geometry} position={poleLightA.position}>
           <meshBasicMaterial color="#ffffe5" />
