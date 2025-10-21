@@ -1,10 +1,12 @@
 import {
+  shaderMaterial,
   Center,
   OrbitControls,
   Sparkles,
   useGLTF,
   useTexture,
 } from '@react-three/drei';
+import { extend } from '@react-three/fiber';
 import type { Mesh } from 'three';
 import * as THREE from 'three';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -19,6 +21,18 @@ type PortalGLTF = GLTF & {
     poleLightB: Mesh;
   };
 };
+
+export const PortalMaterial = shaderMaterial(
+  {
+    uTime: 0,
+    uColorStart: new THREE.Color('#ffffff'),
+    uColorEnd: new THREE.Color('#000000'),
+  },
+  portalVertexShader,
+  portalFragmentShader,
+);
+
+extend({ PortalMaterial });
 
 export const PortalSceneExperience = () => {
   const {
@@ -41,15 +55,7 @@ export const PortalSceneExperience = () => {
           position={portalLight.position}
           rotation={portalLight.rotation}
         >
-          <shaderMaterial
-            vertexShader={portalVertexShader}
-            fragmentShader={portalFragmentShader}
-            uniforms={{
-              uTime: { value: 0 },
-              uColorStart: { value: new THREE.Color('#ffffff') },
-              uColorEnd: { value: new THREE.Color('#000000') },
-            }}
-          />
+          <portalMaterial />
         </mesh>
         <mesh geometry={poleLightA.geometry} position={poleLightA.position}>
           <meshBasicMaterial color="#ffffe5" />
