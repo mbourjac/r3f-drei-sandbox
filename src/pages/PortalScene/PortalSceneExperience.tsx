@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import {
   shaderMaterial,
   Center,
@@ -6,7 +7,7 @@ import {
   useGLTF,
   useTexture,
 } from '@react-three/drei';
-import { extend } from '@react-three/fiber';
+import { extend, useFrame } from '@react-three/fiber';
 import type { Mesh } from 'three';
 import * as THREE from 'three';
 import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -34,13 +35,29 @@ export const PortalMaterial = shaderMaterial(
 
 extend({ PortalMaterial });
 
+interface PortalMaterial extends THREE.ShaderMaterial {
+  uTime: number;
+  uColorStart: THREE.Color;
+  uColorEnd: THREE.Color;
+}
+
 export const PortalSceneExperience = () => {
+  const portalMaterialRef = useRef<PortalMaterial>(null);
+
   const {
     nodes: { baked, portalLight, poleLightA, poleLightB },
   } = useGLTF('./models/portal/portal.glb') as unknown as PortalGLTF;
   const bakedTexture = useTexture('./models/portal/baked.jpg');
 
   bakedTexture.flipY = false;
+
+  useFrame((_state, delta) => {
+    if (portalMaterialRef.current) {
+      portalMaterialRef.current.uTime += delta;
+
+      console.log(portalMaterialRef.current);
+    }
+  });
 
   return (
     <>
@@ -55,7 +72,7 @@ export const PortalSceneExperience = () => {
           position={portalLight.position}
           rotation={portalLight.rotation}
         >
-          <portalMaterial />
+          <portalMaterial ref={portalMaterialRef} />
         </mesh>
         <mesh geometry={poleLightA.geometry} position={poleLightA.position}>
           <meshBasicMaterial color="#ffffe5" />
