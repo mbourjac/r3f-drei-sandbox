@@ -13,6 +13,7 @@ export const Home = () => {
     { path: '/load-models', label: 'Load models' },
     { path: '/text-3d', label: '3D Text' },
     { path: '/portal-scene', label: 'Portal scene' },
+    { path: '/mouse-events', label: 'Mouse events' },
   ];
 
   return (
