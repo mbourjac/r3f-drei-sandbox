@@ -44,12 +44,27 @@ export const Experience = () => {
 
       <color args={['ivory']} attach="background" />
 
-      <mesh position-x={-2} onClick={(event) => event.stopPropagation()}>
+      <mesh
+        position-x={-2}
+        onClick={(event) => event.stopPropagation()}
+        onPointerEnter={(event) => event.stopPropagation()}
+      >
         <sphereGeometry />
         <meshStandardMaterial color="orange" />
       </mesh>
 
-      <mesh ref={cubeRef} position-x={2} scale={1.5} onClick={handleClick}>
+      <mesh
+        ref={cubeRef}
+        position-x={2}
+        scale={1.5}
+        onClick={handleClick}
+        onPointerEnter={() => {
+          document.body.style.cursor = 'pointer';
+        }}
+        onPointerLeave={() => {
+          document.body.style.cursor = 'default';
+        }}
+      >
         <boxGeometry />
         <meshStandardMaterial color="mediumpurple" />
       </mesh>
