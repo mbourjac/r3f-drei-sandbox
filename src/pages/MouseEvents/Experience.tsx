@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { OrbitControls } from '@react-three/drei';
+import { meshBounds, OrbitControls } from '@react-three/drei';
 import { type ThreeEvent, useFrame } from '@react-three/fiber';
 import type { BoxGeometry, Mesh, MeshStandardMaterial } from 'three';
 
@@ -55,6 +55,7 @@ export const Experience = () => {
 
       <mesh
         ref={cubeRef}
+        raycast={meshBounds}
         position-x={2}
         scale={1.5}
         onClick={handleClick}
