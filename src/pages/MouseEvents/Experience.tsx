@@ -44,7 +44,7 @@ export const Experience = () => {
 
       <color args={['ivory']} attach="background" />
 
-      <mesh position-x={-2}>
+      <mesh position-x={-2} onClick={(event) => event.stopPropagation()}>
         <sphereGeometry />
         <meshStandardMaterial color="orange" />
       </mesh>
