@@ -29,12 +29,7 @@ export const CustomObject = () => {
   return (
     <mesh>
       <bufferGeometry ref={geometryRef}>
-        <bufferAttribute
-          attach="attributes-position"
-          count={verticesCount}
-          itemSize={3}
-          array={positions}
-        />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
       <meshStandardMaterial color="red" side={DoubleSide} />
     </mesh>

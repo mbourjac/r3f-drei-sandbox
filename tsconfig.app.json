@@ -22,7 +22,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+
+    "types": ["vite-plugin-glsl/ext"]
   },
   "include": ["src"]
 }

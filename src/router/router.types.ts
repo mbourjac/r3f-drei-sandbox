@@ -1,4 +1,3 @@
-import type { ParseRoute } from '@tanstack/react-router';
-import type { routeTree } from './routeTree.gen';
+import type { FileRoutesByTo } from './routeTree.gen';
 
-export type DefinedRoute = ParseRoute<typeof routeTree>['fullPath'];
+export type DefinedRoute = keyof FileRoutesByTo;

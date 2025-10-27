@@ -1,10 +1,16 @@
 import { OrbitControls } from '@react-three/drei';
+import { EffectComposer, ToneMapping } from '@react-three/postprocessing';
+import { ToneMappingMode } from 'postprocessing';
 import { Perf } from 'r3f-perf';
 
 export const Experience = () => {
   return (
     <>
       <Perf position="top-left" />
+
+      <EffectComposer>
+        <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+      </EffectComposer>
 
       <OrbitControls makeDefault />
 
