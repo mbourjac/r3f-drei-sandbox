@@ -14,6 +14,7 @@ export const Home = () => {
     { path: '/text-3d', label: '3D Text' },
     { path: '/portal-scene', label: 'Portal scene' },
     { path: '/mouse-events', label: 'Mouse events' },
+    { path: '/post-processing', label: 'Post processing' },
   ];
 
   return (
