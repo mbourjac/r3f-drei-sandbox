@@ -1,5 +1,9 @@
 import { OrbitControls } from '@react-three/drei';
-import { EffectComposer, ToneMapping } from '@react-three/postprocessing';
+import {
+  EffectComposer,
+  ToneMapping,
+  Vignette,
+} from '@react-three/postprocessing';
 import { ToneMappingMode } from 'postprocessing';
 import { Perf } from 'r3f-perf';
 
@@ -9,6 +13,7 @@ export const Experience = () => {
       <Perf position="top-left" />
 
       <EffectComposer>
+        <Vignette offset={0.3} darkness={0.9} />
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
 
