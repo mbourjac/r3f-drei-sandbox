@@ -4,16 +4,21 @@ import {
   ToneMapping,
   Vignette,
 } from '@react-three/postprocessing';
-import { ToneMappingMode } from 'postprocessing';
+import { useControls } from 'leva';
+import { BlendFunction, ToneMappingMode } from 'postprocessing';
 import { Perf } from 'r3f-perf';
 
 export const Experience = () => {
+  const { blendFunction } = useControls('vignette', {
+    blendFunction: { options: BlendFunction },
+  });
+
   return (
     <>
       <Perf position="top-left" />
 
       <EffectComposer>
-        <Vignette offset={0.3} darkness={0.9} />
+        <Vignette offset={0.3} darkness={0.9} blendFunction={blendFunction} />
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
 
