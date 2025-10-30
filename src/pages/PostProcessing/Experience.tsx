@@ -2,6 +2,7 @@ import { OrbitControls } from '@react-three/drei';
 import {
   EffectComposer,
   Glitch,
+  Noise,
   ToneMapping,
   Vignette,
 } from '@react-three/postprocessing';
@@ -11,21 +12,12 @@ import { Perf } from 'r3f-perf';
 import * as THREE from 'three';
 
 export const Experience = () => {
-  const { blendFunction, enabled: enabledVignette } = useControls('vignette', {
+  const vignetteControls = useControls('vignette', {
     enabled: { value: false },
     blendFunction: { options: BlendFunction },
   });
 
-  const {
-    enabled: enabledGlitch,
-    glitchMode,
-    delayMin,
-    delayMax,
-    durationMin,
-    durationMax,
-    strengthMin,
-    strengthMax,
-  } = useControls('glitch', {
+  const glitchControls = useControls('glitch', {
     enabled: { value: false },
     glitchMode: { options: GlitchMode },
     delayMin: { value: 0.5, min: 0, max: 5, step: 0.1 },
@@ -36,20 +28,51 @@ export const Experience = () => {
     strengthMax: { value: 0.4, min: 0, max: 1, step: 0.01 },
   });
 
+  const noiseControls = useControls('noise', {
+    enabled: { value: false },
+    premultiply: { value: false },
+    blendFunction: { options: BlendFunction },
+  });
+
   return (
     <>
       <Perf position="top-left" />
 
       <EffectComposer>
-        {enabledVignette ?
-          <Vignette offset={0.3} darkness={0.9} blendFunction={blendFunction} />
+        {vignetteControls.enabled ?
+          <Vignette
+            offset={0.3}
+            darkness={0.9}
+            blendFunction={vignetteControls.blendFunction}
+          />
         : <></>}
-        {enabledGlitch ?
+        {glitchControls.enabled ?
           <Glitch
-            delay={new THREE.Vector2(delayMin, delayMax)}
-            duration={new THREE.Vector2(durationMin, durationMax)}
-            strength={new THREE.Vector2(strengthMin, strengthMax)}
-            mode={glitchMode as GlitchMode}
+            delay={
+              new THREE.Vector2(
+                glitchControls.delayMin,
+                glitchControls.delayMax,
+              )
+            }
+            duration={
+              new THREE.Vector2(
+                glitchControls.durationMin,
+                glitchControls.durationMax,
+              )
+            }
+            strength={
+              new THREE.Vector2(
+                glitchControls.strengthMin,
+                glitchControls.strengthMax,
+              )
+            }
+            mode={glitchControls.glitchMode as GlitchMode}
+          />
+        : <></>}
+        {noiseControls.enabled ?
+          <Noise
+            premultiply={noiseControls.premultiply}
+            blendFunction={noiseControls.blendFunction}
           />
         : <></>}
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
