@@ -1,5 +1,6 @@
 import { OrbitControls } from '@react-three/drei';
 import {
+  Bloom,
   EffectComposer,
   Glitch,
   Noise,
@@ -75,6 +76,7 @@ export const Experience = () => {
             blendFunction={noiseControls.blendFunction}
           />
         : <></>}
+        <Bloom luminanceThreshold={1.1} mipmapBlur />
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
 
@@ -83,7 +85,7 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <color args={['ivory']} attach="background" />
+      <color args={['black']} attach="background" />
 
       <mesh position-x={-2}>
         <sphereGeometry />
@@ -92,7 +94,7 @@ export const Experience = () => {
 
       <mesh position-x={2} scale={1.5}>
         <boxGeometry />
-        <meshStandardMaterial color="mediumpurple" />
+        <meshStandardMaterial color={[4, 1, 2]} />
       </mesh>
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
