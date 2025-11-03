@@ -1,6 +1,7 @@
 import { OrbitControls } from '@react-three/drei';
 import {
   Bloom,
+  DepthOfField,
   EffectComposer,
   Glitch,
   Noise,
@@ -39,6 +40,13 @@ export const Experience = () => {
     enabled: { value: false },
     intensity: { value: 1, min: 0, max: 5, step: 0.1 },
     luminanceThreshold: { value: 1.1, min: 0, max: 2, step: 0.1 },
+  });
+
+  const depthOfFieldControls = useControls('depth of field', {
+    enabled: { value: false },
+    focusDistance: { value: 0.03, min: 0, max: 1, step: 0.01 },
+    focalLength: { value: 0.03, min: 0, max: 1, step: 0.01 },
+    bokehScale: { value: 6, min: 0, max: 10, step: 1 },
   });
 
   return (
@@ -87,6 +95,13 @@ export const Experience = () => {
             luminanceThreshold={bloomControls.luminanceThreshold}
             mipmapBlur
             intensity={bloomControls.intensity}
+          />
+        : <></>}
+        {depthOfFieldControls.enabled ?
+          <DepthOfField
+            focusDistance={depthOfFieldControls.focusDistance}
+            focalLength={depthOfFieldControls.focalLength}
+            bokehScale={depthOfFieldControls.bokehScale}
           />
         : <></>}
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
