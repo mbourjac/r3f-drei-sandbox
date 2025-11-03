@@ -89,7 +89,11 @@ export const Experience = () => {
 
       <mesh position-x={-2}>
         <sphereGeometry />
-        <meshStandardMaterial color="orange" />
+        <meshStandardMaterial
+          color="#ffffff"
+          emissive="orange"
+          emissiveIntensity={2}
+        />
       </mesh>
 
       <mesh position-x={2} scale={1.5}>
