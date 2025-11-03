@@ -35,6 +35,12 @@ export const Experience = () => {
     blendFunction: { options: BlendFunction },
   });
 
+  const bloomControls = useControls('bloom', {
+    enabled: { value: false },
+    intensity: { value: 1, min: 0, max: 5, step: 0.1 },
+    luminanceThreshold: { value: 1.1, min: 0, max: 2, step: 0.1 },
+  });
+
   return (
     <>
       <Perf position="top-left" />
@@ -76,7 +82,13 @@ export const Experience = () => {
             blendFunction={noiseControls.blendFunction}
           />
         : <></>}
-        <Bloom luminanceThreshold={1.1} mipmapBlur />
+        {bloomControls.enabled ?
+          <Bloom
+            luminanceThreshold={bloomControls.luminanceThreshold}
+            mipmapBlur
+            intensity={bloomControls.intensity}
+          />
+        : <></>}
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
 
@@ -85,20 +97,27 @@ export const Experience = () => {
       <directionalLight position={[1, 2, 3]} intensity={4.5} />
       <ambientLight intensity={1.5} />
 
-      <color args={['black']} attach="background" />
+      <color
+        args={[bloomControls.enabled ? 'black' : 'ivory']}
+        attach="background"
+      />
 
       <mesh position-x={-2}>
         <sphereGeometry />
-        <meshStandardMaterial
-          color="#ffffff"
-          emissive="orange"
-          emissiveIntensity={2}
-        />
+        {bloomControls.enabled ?
+          <meshStandardMaterial
+            color="#ffffff"
+            emissive="orange"
+            emissiveIntensity={2}
+          />
+        : <meshStandardMaterial color="orange" />}
       </mesh>
 
       <mesh position-x={2} scale={1.5}>
         <boxGeometry />
-        <meshStandardMaterial color={[4, 1, 2]} />
+        {bloomControls.enabled ?
+          <meshStandardMaterial color={[4, 1, 2]} />
+        : <meshStandardMaterial color="mediumpurple" />}
       </mesh>
 
       <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
